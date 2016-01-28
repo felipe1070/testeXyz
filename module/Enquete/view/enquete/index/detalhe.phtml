@@ -1,0 +1,41 @@
+<div class="panel panel-default" ">
+		
+		        <div class="panel-heading">
+		          <div class="panel-btns">
+		           
+		            <a href="" class="minimize">−</a>
+		          </div>
+		          <h4 class="panel-title"> Enquete <?php echo $this->entity->getTitulo()?></h4>
+		        
+		        </div>
+		        <div class="panel-body">
+		         	 
+		         	 <div class="table-responsive">
+		         	   
+			            <table  class="table table-striped mb30">					
+								
+			          		
+			          		
+			          		
+			          			<?php foreach ($this->entity->getPerguntas() as $value):?>
+			          				<tr>
+			          					<td style="background-color: #f5f5f5"><?php echo $value->getPergunta()?>
+					          				<?php foreach ($value->getRespostas() as $value2):?>
+					          					<tr>
+					          						<td style="background-color: white; padding-left: 50px"><?php echo $value2->getResposta()?></td>
+					          					</tr>
+					          				<?php endforeach;?>	
+			          					</td>
+			          				</tr>
+			          			<?php endforeach;?>
+			          		
+								
+						
+						</table>
+	         	
+	         		</div>
+		         
+		        </div><!-- panel-body -->
+		        
+		
+	</div>

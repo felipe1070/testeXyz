@@ -1,0 +1,50 @@
+<div class="jumbotron">
+
+	<?php if($this->zero):?>
+	
+	<h3 style="text-align: center;"> Em breve teremos novas enquetes</h3>
+	
+	<?php elseif($this->final):?>
+	
+		<h3 style="text-align: center;"> Obrigado por responder nossas enquetes</h3>
+	<a class="btn btn-primary" href="<?php echo $this->url("application/default", array("controller"=>'index', 'action'=>"reset"))?>">Responder novamente</a>
+	
+	
+	<?php else:?>
+	
+		<h2 style="text-align: center;margin-bottom: 50px;"><?php echo $this->enquete->getTitulo()?></h2>
+		<?php 
+			$nperfuntas = false;
+			$nrespodtas = false;
+		?>
+		<form action="<?php echo $this->url("application/default", array("controller"=>"index", "action"=>'responder')) ?>" method="post">
+			<?php foreach ($this->enquete->getPerguntas() as $value):?>
+				<?php $nperfuntas = true;?>
+				<h4 style="margin-top: 40px;"><?php echo $value->getPergunta()?></h4>
+				<?php 
+					if(count($value->getRespostas())>0):
+						$nrespodtas = true;
+					else:
+						$nrespodtas = false;
+					endif;
+				?>
+				<?php foreach ($value->getRespostas() as $value2):?>
+					<div class="radio" style="padding-left: 20px !important;"> 
+					<label> 
+						<input style="margin-top: 9px;" type="radio" required="required" name="respostas<?php echo $value->getId()?>" id="option<?php echo $value2->getId() ?>" value="<?php echo $value2->getId() ?>" > 
+							<span style="font-size: 19px;"><?php  echo $value2->getResposta()?> </span>
+						</label>
+					</div>
+				<?php endforeach;?>
+			<?php endforeach;?>
+			
+			<?php if($nperfuntas && $nrespodtas):?>
+				<button style="margin-top: 20px;" class="btn btn-primary"  type="submit">Responder</button>
+			<?php endif;?>
+			<input type="hidden" name="id" value="<?php echo $this->enquete->getId()?>">
+		</form>
+		
+	<?php endif;?>	
+</div>
+
+

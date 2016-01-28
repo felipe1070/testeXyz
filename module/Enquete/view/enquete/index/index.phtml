@@ -1,0 +1,122 @@
+<?php if($this->success):?>
+
+<div class="alert alert-success" style="margin-top: 5px;">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <?php echo $this->success[0]; ?>
+</div>
+
+<?php elseif($this->error): ?>
+<div class="alert alert-danger" style="margin-top: 5px;">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <?php echo $this->error[0]; ?>
+</div>
+<?php endif;?>
+
+
+<a class="btn btn-primary" href="<?php echo $this->url("admin/default", array("controller"=>"index", 'action'=>'new'))?>">Nova Enquete</a>
+
+
+
+<div class="panel panel-default" style="margin-top: 20px;">
+		
+		        <div class="panel-heading">
+		          <div class="panel-btns">
+		           
+		            <a href="" class="minimize">−</a>
+		          </div>
+		          <h4 class="panel-title">Enquetes Cadastradas</h4>
+		          
+		        </div>
+		        <div class="panel-body">
+		         	 
+		         	 <div class="table-responsive">
+		         	   
+			            <table id="table2" class="table table-striped mb30">					
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Título</th>
+																																								
+										<th class="text-center">Ações</th>
+									</tr>
+								</thead>
+								<tbody>	
+			          
+								<?php $n=0;foreach ($this->list as $value): $n++;?>
+									
+										<tr>
+											<td class=""><?php echo $n?></td>
+											<td><?php echo $value->getTitulo()?></td>
+											
+																	
+											<td class="table-action text-center">
+												
+													
+				                						
+				                						
+				                						
+				                						<a href="<?php echo $this->url("admin/default", array("controller"=>'index', "action"=>"detalhe", "id"=>$value->getId()))?>" title="Detalhar" class=" tooltips" data-placement="top" >
+				                    						<i class="fa  fa-search-plus"></i>
+				                						</a>| 
+				                						
+				                						<a href="<?php echo $this->url("admin/default", array("controller"=>'index', "action"=>"edit", "id"=>$value->getId()))?>" title="Editar" class=" tooltips" data-placement="top" >
+				                    						<i class="fa  fa-edit"></i>
+				                						</a>|
+				                						
+			                							<a href="#" title="Excluir" class=" tooltips" data-placement="top" data-toggle="modal" data-target="#ModalDe-<?php echo $value->getId() ?>">
+			                    							<i class="fa  fa-trash-o"></i>
+			                							</a>
+			                						
+			                							<div class="modal fade" id="ModalDe-<?php echo $value->getId()?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+															  <div class="modal-dialog">
+															    <div class="modal-content">
+															      <div class="modal-header">
+															        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+															        <h4 class="modal-title" id="myModalLabel">Excluir Enquete</h4>
+															      </div>	
+															      <form method="post" action="<?php echo $this->url("admin/default", array("controller"=>'index', "action"=>"delete-enquete"))?>">									      
+																      <div class="modal-body" >							      		 
+															              
+																              Tem certeza que dejesa excluir esta Enquete ?	
+																              <input type="hidden" name="id_enquete" value="<?php echo $value->getId()?>">		               
+																	      	  
+																      </div>
+															      
+																      <div class="modal-footer">
+																      		
+																		      
+																		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+																		        <button type="submit"  class="btn btn-primary" >Excluir</button>								        			        
+																    		
+																      </div>
+															      </form>
+																   
+															    </div>
+															  </div>
+														</div> 	
+				                						
+				                					
+				                					
+				                						
+				                					
+				                					
+			                						
+			                						
+													
+													           						
+		                						
+											</td>
+											
+										
+										</tr>
+								
+								<?php endforeach;?>
+							</tbody>
+						</table>
+	         	
+	         		</div>
+		         
+		        </div><!-- panel-body -->
+		        
+		
+	</div>
